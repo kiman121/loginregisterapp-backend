@@ -101,7 +101,7 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    let host = `localhost:3000`;
+    let host = req.get('host');
     const resetURL = `${req.protocol}://${host}/reset-password/${resetToken}`;
 
     // Send email here
