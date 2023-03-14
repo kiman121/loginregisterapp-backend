@@ -4,6 +4,7 @@ dotenv.config({ path: './config.env' });
 const environment = {
   port: parseInt(process.env.PORT, 10) || 3002,
   nodeEnv: process.env.NODE_ENV || 'production',
+  clientDomain: process.env.CLIENT_DOMAIN,
   saltRounds: parseInt(process.env.SALT_ROUNDS),
   jwtAccessTokenSecret: process.env.JWT_ACCESS_TOKEN_SECRET,
   jwtRefreshTokenSecret: process.env.JWT_REFRESH_TOKEN_SECRET,

@@ -5,8 +5,9 @@ import { StatusCodes } from 'http-status-codes';
 import User from '../models/userModel.js';
 import Email from '../utils/emailUtil.js';
 import { generateToken } from '../helpers/jwtHelper.js';
-
 import AppError from '../utils/appErrorUtil.js';
+import environment from '../../config/environment.js';
+
 /**
  * @description Register a new user
  * @route POST /api/v1/users
@@ -101,8 +102,8 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   try {
-    let host = req.get('host');
-    const resetURL = `${req.protocol}://${host}/reset-password/${resetToken}`;
+    let { clientDomain } = environment;
+    const resetURL = `${clientDomain}/reset-password/${resetToken}`;
 
     // Send email here
     await new Email(user, resetURL).sendPasswordReset();
